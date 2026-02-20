@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Solutions | Precision Hydraulic & Engineering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        alphaOrange: '#F16522', 
+                        alphaBlue: '#006EB6',   
+                        deepDark: '#0B1120',
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 1. Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed; top: 0; left: 0; height: 4px;
+            background: #F16522; z-index: 2000; width: 0%;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 0 10px rgba(241, 101, 34, 0.8);
+        }
+
+        /* 2. Floating Animation for Images */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+
+        /* 3. Pulsing Glow for Buttons */
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(241, 101, 34, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(241, 101, 34, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(241, 101, 34, 0); }
+        }
+        .animate-pulse-glow { animation: pulseGlow 2s infinite; }
+
+        /* 4. Expanding Lines */
+        @keyframes expandWidth {
+            0% { width: 0; opacity: 0; }
+            100% { width: 8rem; opacity: 1; } /* 8rem = w-32 in tailwind */
+        }
+        .expand-line { width: 0; }
+        .reveal.active .expand-line { animation: expandWidth 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+
+        /* Existing Dropdown & Reveal Logic */
+        .dropdown { height: 100%; display: flex; align-items: center; }
+        .dropdown:hover .dropdown-menu { 
+            visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; 
+        }
+        .dropdown-menu { 
+            visibility: hidden; opacity: 0; position: absolute; top: 100%; left: 0;
+            padding-top: 0.5rem; z-index: 1000; transform: translateY(15px); transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); pointer-events: none;
+        }
+        .dropdown-inner {
+            background: white; min-width: 340px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border-radius: 0.75rem; border: 1px solid #e2e8f0; padding: 0.5rem;
+        }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        .nav-link { position: relative; color: #1e293b; transition: color 0.3s; }
+        .nav-link:hover { color: #F16522; }
+    </style>
+</head>
+<body class="bg-white text-slate-900 font-sans">
+
+    <div id="scroll-progress"></div>
+
+    <nav class="fixed w-full z-[1000] bg-white border-b-2 border-slate-100 shadow-sm h-24">
+        <div class="container mx-auto px-6 h-full flex justify-between items-center">
+            
+            <a href="index.html" class="flex-shrink-0">
+                <img src="logo.jpg" alt="Alpha Solutions" class="h-14 hover:scale-105 transition duration-300">
+            </a>
+            
+            <div class="hidden lg:flex items-center space-x-8 h-full">
+                <a href="index.html" class="nav-link text-xs font-bold tracking-widest uppercase">HOME</a>
+                <a href="journey.html" class="nav-link text-xs font-bold tracking-widest uppercase">OUR JOURNEY</a>
+                <a href="mission.html" class="nav-link text-xs font-bold tracking-widest uppercase">MISSION & VISION</a>
+                
+                <div class="relative dropdown group">
+                    <a href="#" class="nav-link flex items-center text-xs font-bold tracking-widest uppercase focus:outline-none">
+                        PRODUCT <i class="fas fa-chevron-down ml-2 text-[10px] group-hover:rotate-180 transition duration-300"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-inner">
+                            <a href="hose-pipe.html" class="block px-5 py-3 hover:bg-slate-50 hover:pl-7 rounded-lg text-sm font-bold text-slate-700 hover:text-alphaOrange border-b border-slate-50 transition-all duration-300">Hose Pipe</a>
+                            <a href="fittings.html" class="block px-5 py-3 hover:bg-slate-50 hover:pl-7 rounded-lg text-sm font-bold text-slate-700 hover:text-alphaOrange transition-all duration-300">Fittings and Accessories</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative dropdown group">
+                    <a href="services.html" class="nav-link flex items-center text-xs font-bold tracking-widest uppercase focus:outline-none">
+                        SERVICES <i class="fas fa-chevron-down ml-2 text-[10px] group-hover:rotate-180 transition duration-300"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-inner">
+                            <a href="services.html" class="block px-5 py-3 hover:bg-slate-50 hover:pl-7 rounded-lg text-sm font-bold text-slate-700 hover:text-alphaOrange border-b border-slate-50 transition-all duration-300">View All Services</a>
+                            <a href="engineering-services.html" class="block px-5 py-3 hover:bg-slate-50 hover:pl-7 rounded-lg text-sm font-bold text-slate-700 hover:text-alphaOrange border-b border-slate-50 transition-all duration-300">Plant and Product Engineering</a>
+                            <a href="pollution-control.html" class="block px-5 py-3 hover:bg-slate-50 hover:pl-7 rounded-lg text-sm font-bold text-slate-700 hover:text-alphaOrange border-b border-slate-50 transition-all duration-300">Air Pollution Control / Gas Cleaning</a>
+                            <a href="material-handling.html" class="block px-5 py-3 hover:bg-slate-50 hover:pl-7 rounded-lg text-sm font-bold text-slate-700 hover:text-alphaOrange border-b border-slate-50 transition-all duration-300">Bulk Material Handling System</a>
+                            <a href="other-services.html" class="block px-5 py-3 hover:bg-slate-50 hover:pl-7 rounded-lg text-sm font-bold text-slate-700 hover:text-alphaOrange transition-all duration-300">Other Services</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="contact.html" class="nav-link text-xs font-bold tracking-widest uppercase">CONTACT US</a>
+
+                <a href="contact.html" class="bg-alphaOrange text-white text-xs px-8 py-3.5 rounded-full font-extrabold shadow-md transform hover:-translate-y-1 tracking-widest uppercase animate-pulse-glow">GET A QUOTE</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-48 pb-20 bg-slate-50 overflow-hidden">
+        <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="reveal active">
+                <span class="text-alphaOrange font-black tracking-widest text-xs uppercase mb-4 block tracking-[0.3em]">Manufacturing Excellence</span>
+                <h1 class="text-6xl font-extrabold text-deepDark leading-tight mb-6">
+                    Precision Hydraulic <br><span class="text-alphaBlue italic">Hose Assemblies.</span>
+                </h1>
+                <p class="text-lg text-slate-600 mb-8 font-medium">Bhopal's premier manufacturer of high-pressure hydraulic hoses, industrial pipes, and fittings, engineered for absolute safety and reliability since 2018.</p>
+                <div class="flex gap-4">
+                    <a href="#products" class="bg-alphaOrange text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-deepDark transition duration-300 transform hover:-translate-y-1">Explore Our Hoses</a>
+                    <a href="#services" class="border-2 border-alphaBlue text-alphaBlue px-8 py-4 rounded-xl font-bold hover:bg-alphaBlue hover:text-white transition duration-300">Engineering Services</a>
+                </div>
+            </div>
+            <div class="reveal active relative">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-alphaOrange/20 blur-[100px] rounded-full"></div>
+                <img src="https://equipmenttimes.in/uploads/images/202509/image_870x580_68c8f16034185.jpg" class="rounded-[2.5rem] shadow-2xl border-4 border-white relative z-10 animate-float" alt="Hydraulic Hose Manufacturing">
+            </div>
+        </div>
+    </header>
+
+    <section id="products" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="reveal mb-16 text-center">
+                <h2 class="text-4xl font-extrabold mb-4 uppercase tracking-widest text-deepDark">Our Core <span class="text-alphaOrange">Products</span></h2>
+                <div class="h-1.5 bg-alphaOrange mx-auto rounded-full expand-line"></div>
+                <p class="mt-6 text-slate-500 max-w-2xl mx-auto font-medium">We manufacture and supply a comprehensive range of leak-proof, high-pressure hydraulic and industrial hose assemblies.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="reveal p-6 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-2xl hover:border-alphaOrange transition duration-500 group transform hover:-translate-y-2">
+                    <div class="h-48 overflow-hidden rounded-2xl mb-6 bg-slate-200">
+                        <img src="https://5.imimg.com/data5/GI/YC/MY-32061269/hydraulic-hoses-and-fittings-500x500.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Hydraulic Hoses">
+                    </div>
+                    <h3 class="text-xl font-bold text-alphaBlue mb-3 group-hover:text-alphaOrange transition">Hydraulic Hoses</h3>
+                    <p class="text-sm text-slate-500 mb-6 font-medium">High-pressure braided, spiral, and thermoplastic hoses for heavy machinery.</p>
+                    <a href="hose-pipe.html" class="text-alphaOrange text-xs font-black tracking-widest uppercase">VIEW SPECS →</a>
+                </div>
+
+                <div class="reveal delay-100 p-6 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-2xl hover:border-alphaOrange transition duration-500 group transform hover:-translate-y-2">
+                    <div class="h-48 overflow-hidden rounded-2xl mb-6 bg-slate-200">
+                        <img src="https://img.freepik.com/premium-photo/high-pressure-hydraulic-hose-system-connected-steel-pipes-closeup-marine-hydraulics_187194-5213.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Industrial Hoses">
+                    </div>
+                    <h3 class="text-xl font-bold text-alphaBlue mb-3 group-hover:text-alphaOrange transition">Industrial Hoses</h3>
+                    <p class="text-sm text-slate-500 mb-6 font-medium">Engineered for air transfer, water supply, agriculture, and chemical handling.</p>
+                    <a href="hose-pipe.html" class="text-alphaOrange text-xs font-black tracking-widest uppercase">VIEW SPECS →</a>
+                </div>
+
+                <div class="reveal delay-200 p-6 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-2xl hover:border-alphaOrange transition duration-500 group transform hover:-translate-y-2">
+                    <div class="h-48 overflow-hidden rounded-2xl mb-6 bg-slate-200">
+                        <img src="https://cdn.prod.website-files.com/64c9a179aab657b0f015ff2e/65922cdf86f93610c26a7638_Hoses%20in%20the%20Oil%20%26%20Gas%20Industry.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Specialty Hoses">
+                    </div>
+                    <h3 class="text-xl font-bold text-alphaBlue mb-3 group-hover:text-alphaOrange transition">Specialty Hoses</h3>
+                    <p class="text-sm text-slate-500 mb-6 font-medium">SS Corrugated flexible hoses, Steam hoses, and Carbon-Free welding hoses.</p>
+                    <a href="hose-pipe.html" class="text-alphaOrange text-xs font-black tracking-widest uppercase">VIEW SPECS →</a>
+                </div>
+
+                <div class="reveal delay-300 p-6 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-2xl hover:border-alphaOrange transition duration-500 group transform hover:-translate-y-2">
+                    <div class="h-48 overflow-hidden rounded-2xl mb-6 bg-slate-200">
+                        <img src="https://www.abhydraulics.in/images/products/hose-pipe-fitting.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Hose Fittings">
+                    </div>
+                    <h3 class="text-xl font-bold text-alphaBlue mb-3 group-hover:text-alphaOrange transition">Fittings & Parts</h3>
+                    <p class="text-sm text-slate-500 mb-6 font-medium">High-pressure adapters, Quick Release Couplings (QRC), jointers, and spiral sleeves.</p>
+                    <a href="fittings.html" class="text-alphaOrange text-xs font-black tracking-widest uppercase">VIEW CATALOG →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-deepDark text-white">
+        <div class="container mx-auto px-6">
+            <div class="reveal mb-16 text-center">
+                <h2 class="text-4xl font-extrabold mb-4 uppercase tracking-widest">Integrated <span class="text-alphaBlue">Engineering</span> Services</h2>
+                <div class="h-1.5 bg-white mx-auto rounded-full expand-line"></div>
+                <p class="mt-6 text-slate-400 max-w-2xl mx-auto font-medium">Beyond hose assemblies, we provide robust plant automation and industrial handling systems to support complete factory operations.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="reveal flex flex-col sm:flex-row bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:bg-white/10 hover:border-alphaOrange transition duration-500 group transform hover:-translate-y-2 shadow-2xl">
+                    <div class="sm:w-2/5 h-48 sm:h-auto overflow-hidden relative">
+                        <div class="absolute inset-0 bg-deepDark/20 group-hover:bg-transparent transition duration-500 z-10"></div>
+                        <img src="img_Engineering&plant.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Plant Engineering">
+                    </div>
+                    <div class="sm:w-3/5 p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold mb-3 text-alphaOrange">Plant & Product Engineering</h3>
+                        <p class="text-sm text-slate-400 mb-6">Process modeling, industrial design, and complete factory support services.</p>
+                        <a href="engineering-services.html" class="text-white text-xs font-black tracking-widest uppercase hover:text-alphaOrange transition">LEARN MORE →</a>
+                    </div>
+                </div>
+
+                <div class="reveal delay-100 flex flex-col sm:flex-row bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:bg-white/10 hover:border-alphaBlue transition duration-500 group transform hover:-translate-y-2 shadow-2xl">
+                    <div class="sm:w-2/5 h-48 sm:h-auto overflow-hidden relative">
+                        <div class="absolute inset-0 bg-deepDark/20 group-hover:bg-transparent transition duration-500 z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1578604665675-9aee692f6ddc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YWlyJTIwcG9sbHV0aW9ufGVufDB8fDB8fHww" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Air Pollution Control">
+                    </div>
+                    <div class="sm:w-3/5 p-8 flex flex-col justify-center">
+                        <h3 class="text-xl font-bold mb-3 text-alphaBlue">Air Pollution Control</h3>
+                        <p class="text-sm text-slate-400 mb-6">Bag filters, scrubbers, cyclones, and advanced gas cleaning systems.</p>
+                        <a href="pollution-control.html" class="text-white text-xs font-black tracking-widest uppercase hover:text-alphaBlue transition">LEARN MORE →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-deepDark text-slate-300 py-16 border-t-4 border-alphaOrange">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <img src="logo.jpg" class="h-14 mb-6 brightness-0 invert" alt="Alpha Solutions">
+                <p class="text-sm text-slate-400 leading-relaxed mb-8 font-medium">Technology-driven engineering solutions and precision hydraulic hose assemblies manufacturing since 2018.</p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://www.facebook.com/your-page-name" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-300 hover:bg-alphaBlue hover:text-white transition-colors shadow-lg">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/alphasolution5?igsh=MTl6cnEwbHAyYTZt" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-300 hover:bg-alphaOrange hover:text-white transition-colors shadow-lg">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/alpha-solutions-9b22ab290?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-300 hover:bg-blue-600 hover:text-white transition-colors shadow-lg">
+                        <i class="fab fa-linkedin-in text-lg"></i>
+                    </a>
+                    <a href="https://youtube.com/@alphasolutionhosemaker?si=oi68dfaOndxurLy8" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-300 hover:bg-red-600 hover:text-white transition-colors shadow-lg">
+                        <i class="fab fa-youtube text-lg"></i>
+                    </a>
+                    <a href="https://wa.me/919301885304" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-300 hover:bg-green-500 hover:text-white transition-colors shadow-lg">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-extrabold tracking-widest uppercase mb-6 text-sm border-b border-slate-700 pb-2 inline-block">Contact Us</h4>
+                <ul class="space-y-4 text-sm font-medium">
+                    <li class="flex items-start"><i class="fas fa-map-marker-alt text-alphaOrange mt-1 mr-4 text-lg"></i><span class="leading-relaxed text-slate-400">Plot No: 11, Sector-I Industrial Area,<br>Near Emli Wali Mata Mandir,<br>Govindpura, Bhopal, MP - 462023</span></li>
+                    <li class="flex items-start pt-2"><i class="fas fa-phone-alt text-alphaOrange mt-1 mr-4 text-lg"></i><div class="flex flex-col space-y-1 text-slate-400"><a href="tel:+919301885304" class="hover:text-alphaOrange transition">+91-9301885304</a><a href="tel:+919109153184" class="hover:text-alphaOrange transition">+91-9109153184</a><a href="tel:+919785165015" class="hover:text-alphaOrange transition">+91-9785165015</a></div></li>
+                    <li class="flex items-center pt-2"><i class="fas fa-envelope text-alphaOrange mr-4 text-lg"></i><a href="mailto:info@alphsolution.in" class="text-slate-400 hover:text-alphaOrange transition">info@alphsolution.in</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-extrabold tracking-widest uppercase mb-6 text-sm border-b border-slate-700 pb-2 inline-block">Quick Links</h4>
+                <ul class="space-y-3 text-sm font-medium text-slate-400">
+                    <li><a href="Hose-pipe.html" class="hover:text-alphaBlue transition flex items-center"><i class="fas fa-chevron-right text-[10px] mr-2 text-alphaOrange"></i> Hose Pipes</a></li>
+                    <li><a href="journey.html" class="hover:text-alphaBlue transition flex items-center"><i class="fas fa-chevron-right text-[10px] mr-2 text-alphaOrange"></i> Our Journey</a></li>
+                    <li><a href="hose-pipe.html" class="hover:text-alphaBlue transition flex items-center"><i class="fas fa-chevron-right text-[10px] mr-2 text-alphaOrange"></i> Hydraulic Hoses</a></li>
+                    <li><a href="engineering-services.html" class="hover:text-alphaBlue transition flex items-center"><i class="fas fa-chevron-right text-[10px] mr-2 text-alphaOrange"></i> Engineering Services</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 mt-16 pt-8 border-t border-slate-800 text-center">
+            <p class="text-slate-500 text-[10px] font-bold tracking-[0.3em] uppercase">© 2026 Alpha Solutions Bhopal. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/919301885304" target="_blank" class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 z-[2000]">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
