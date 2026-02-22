@@ -51,10 +51,24 @@
         /* 4. Expanding Lines */
         @keyframes expandWidth {
             0% { width: 0; opacity: 0; }
-            100% { width: 8rem; opacity: 1; } /* 8rem = w-32 in tailwind */
+            100% { width: 8rem; opacity: 1; }
         }
         .expand-line { width: 0; }
         .reveal.active .expand-line { animation: expandWidth 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+
+        /* 5. INFINITE SCROLLING MARQUEE (This makes the logos move!) */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
 
         /* Existing Dropdown & Reveal Logic */
         .dropdown { height: 100%; display: flex; align-items: center; }
@@ -77,6 +91,7 @@
         .nav-link { position: relative; color: #1e293b; transition: color 0.3s; }
         .nav-link:hover { color: #F16522; }
     </style>
+    
 </head>
 <body class="bg-white text-slate-900 font-sans">
 
@@ -182,6 +197,33 @@
             </div>
         </div>
     </header>
+
+    <section class="py-16 bg-alphaOrange overflow-hidden relative">
+        <div class="container mx-auto px-6 text-center mb-10 reveal">
+            <h3 class="text-sm font-extrabold text-white tracking-widest uppercase">Trusted By Leading Industrial Enterprises</h3>
+        </div>
+        
+        <div class="w-full overflow-hidden flex whitespace-nowrap">
+            
+            <div class="animate-marquee flex items-center gap-16 px-8">
+                <img src="crompton.png" alt="Crompton" class="h-10 md:h-14 object-contain">
+                <img src="verdhman.png" alt="Verdhman" class="h-10 md:h-14 object-contain">
+                <img src="tacc.png" alt="TACC" class="h-10 md:h-14 object-contain">
+                <img src="pecific.png" alt="Pecific" class="h-10 md:h-14 object-contain">
+                <img src="paramount.png" alt="Paramount" class="h-10 md:h-14 object-contain">
+                <img src="heglimited.png" alt="HEG Limited" class="h-10 md:h-14 object-contain">
+                <img src="eicher.png" alt="Eicher" class="h-10 md:h-14 object-contain">
+
+                <img src="crompton.png" alt="Crompton" class="h-10 md:h-14 object-contain">
+                <img src="verdhman.png" alt="Verdhman" class="h-10 md:h-14 object-contain">
+                <img src="tacc.png" alt="TACC" class="h-10 md:h-14 object-contain">
+                <img src="pecific.png" alt="Pecific" class="h-10 md:h-14 object-contain">
+                <img src="paramount.png" alt="Paramount" class="h-10 md:h-14 object-contain">
+                <img src="heglimited.png" alt="HEG Limited" class="h-10 md:h-14 object-contain">
+                <img src="eicher.png" alt="Eicher" class="h-10 md:h-14 object-contain">
+            </div>
+        </div>
+    </section>
 
     <section id="products" class="py-24 bg-white">
         <div class="container mx-auto px-6">
