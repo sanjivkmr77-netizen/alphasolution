@@ -96,8 +96,43 @@
                 </div>
 
                 <a href="contact.html" class="nav-link text-xs font-bold tracking-widest uppercase">CONTACT US</a>
-
                 <a href="contact.html" class="bg-alphaOrange text-white text-xs px-8 py-3.5 rounded-full font-extrabold shadow-md transform hover:-translate-y-1 tracking-widest uppercase animate-pulse-glow">GET A QUOTE</a>
+            </div>
+
+            <button id="mobile-menu-btn" class="lg:hidden text-deepDark focus:outline-none hover:text-alphaOrange transition">
+                <i class="fas fa-bars text-3xl"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-24 left-0 w-full bg-white shadow-2xl border-t border-slate-100 max-h-[calc(100vh-6rem)] overflow-y-auto">
+            <div class="flex flex-col px-6 py-6 space-y-4">
+                <a href="index.html" class="text-sm font-extrabold tracking-widest uppercase text-deepDark hover:text-alphaOrange border-b border-slate-100 pb-3">Home</a>
+                <a href="journey.html" class="text-sm font-extrabold tracking-widest uppercase text-deepDark hover:text-alphaOrange border-b border-slate-100 pb-3">Our Journey</a>
+                <a href="mission.html" class="text-sm font-extrabold tracking-widest uppercase text-deepDark hover:text-alphaOrange border-b border-slate-100 pb-3">Mission & Vision</a>
+                
+                <div class="border-b border-slate-100 pb-3">
+                    <span class="text-sm font-extrabold tracking-widest uppercase text-alphaBlue block mb-3">Products</span>
+                    <div class="pl-4 flex flex-col space-y-3">
+                        <a href="hose-pipe.html" class="text-sm font-bold text-slate-500 hover:text-alphaOrange flex items-center"><i class="fas fa-chevron-right text-[10px] mr-2 text-alphaOrange"></i> Hose Pipe</a>
+                        <a href="fittings.html" class="text-sm font-bold text-slate-500 hover:text-alphaOrange flex items-center"><i class="fas fa-chevron-right text-[10px] mr-2 text-alphaOrange"></i> Fittings & Accessories</a>
+                    </div>
+                </div>
+
+                <div class="border-b border-slate-100 pb-3">
+                    <a href="services.html" class="text-sm font-extrabold tracking-widest uppercase text-alphaBlue block mb-3 hover:text-alphaOrange">Services</a>
+                    <div class="pl-4 flex flex-col space-y-3">
+                        <a href="engineering-services.html" class="text-sm font-bold text-slate-500 hover:text-alphaOrange flex items-center"><i class="fas fa-chevron-right text-[10px] mr-2 text-alphaOrange"></i> Plant & Product Engineering</a>
+                        <a href="pollution-control.html" class="text-sm font-bold text-slate-500 hover:text-alphaOrange flex items-center"><i class="fas fa-chevron-right text-[10px] mr-2 text-alphaOrange"></i> Air Pollution Control</a>
+                        <a href="material-handling.html" class="text-sm font-bold text-slate-500 hover:text-alphaOrange flex items-center"><i class="fas fa-chevron-right text-[10px] mr-2 text-alphaOrange"></i> Bulk Material Handling</a>
+                        <a href="other-services.html" class="text-sm font-bold text-slate-500 hover:text-alphaOrange flex items-center"><i class="fas fa-chevron-right text-[10px] mr-2 text-alphaOrange"></i> Other Services</a>
+                    </div>
+                </div>
+
+                <a href="contact.html" class="text-sm font-extrabold tracking-widest uppercase text-deepDark hover:text-alphaOrange border-b border-slate-100 pb-3">Contact Us</a>
+                
+                <div class="pt-4">
+                    <a href="contact.html" class="block text-center bg-alphaOrange text-white text-sm py-4 rounded-xl font-extrabold shadow-md tracking-widest uppercase">GET A QUOTE</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -357,6 +392,51 @@
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+    <script>
+        // Wait for the entire page to load first
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. MOBILE MENU TOGGLE LOGIC
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileBtn && mobileMenu) {
+                mobileBtn.addEventListener('click', () => {
+                    // Toggle the visibility
+                    mobileMenu.classList.toggle('hidden');
+                    
+                    // Switch icon between hamburger and X
+                    const icon = mobileBtn.querySelector('i');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        icon.classList.remove('fa-times', 'fa-xmark');
+                        icon.classList.add('fa-bars');
+                    } else {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times', 'fa-xmark');
+                    }
+                });
+            }
+
+            // 2. SCROLL PROGRESS BAR LOGIC
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                const progressBar = document.getElementById("scroll-progress");
+                if (progressBar) progressBar.style.width = scrolled + "%";
+            });
+
+            // 3. SCROLL REVEAL ANIMATIONS
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { 
+                    if (entry.isIntersecting) entry.target.classList.add('active'); 
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
     </script>
 </body>
 </html>
